@@ -1,0 +1,190 @@
+!-   ===========  ALL OBJECTS IN CLASS: ENERGYMANAGEMENTSYSTEM:SENSOR ===========
+
+EnergyManagementSystem:Sensor,
+    Temp_Dorm1,              !- Name
+    Dorm1,                   !- Output:Variable or Output:Meter Index Key Name
+    Zone Operative Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Temp_Sala,               !- Name
+    Sala,                    !- Output:Variable or Output:Meter Index Key Name
+    Zone Operative Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Ocup_Dorm1,              !- Name
+    Dormitorio1,             !- Output:Variable or Output:Meter Index Key Name
+    People Occupant Count;   !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Ocup_Sala,               !- Name
+    Sala1,                   !- Output:Variable or Output:Meter Index Key Name
+    People Occupant Count;   !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Temp_Ext,                !- Name
+    Environment,             !- Output:Variable or Output:Meter Index Key Name
+    Site Outdoor Air Drybulb Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Tar_D1,                  !- Name
+    Dorm1,                   !- Output:Variable or Output:Meter Index Key Name
+    Zone Mean Air Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Tar_Sala,                !- Name
+    Sala,                    !- Output:Variable or Output:Meter Index Key Name
+    Zone Mean Air Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Sensor_HVACD1,           !- Name
+    HVAC_Dorm1,              !- Output:Variable or Output:Meter Index Key Name
+    Schedule Value;          !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Sensor_HVACSALA,         !- Name
+    HVAC_Sala,               !- Output:Variable or Output:Meter Index Key Name
+    Schedule Value;          !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Temp_Dorm2,              !- Name
+    Dorm2,                   !- Output:Variable or Output:Meter Index Key Name
+    Zone Operative Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Ocup_Dorm2,              !- Name
+    Dormitorio2,             !- Output:Variable or Output:Meter Index Key Name
+    People Occupant Count;   !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Tar_D2,                  !- Name
+    Dorm2,                   !- Output:Variable or Output:Meter Index Key Name
+    Zone Mean Air Temperature;  !- Output:Variable or Output:Meter Name
+
+EnergyManagementSystem:Sensor,
+    Sensor_HVACD2,           !- Name
+    HVAC_Dorm2,              !- Output:Variable or Output:Meter Index Key Name
+    Schedule Value;          !- Output:Variable or Output:Meter Name
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ENERGYMANAGEMENTSYSTEM:ACTUATOR ===========
+
+EnergyManagementSystem:Actuator,
+    Controle_HVAC_Dorm1,     !- Name
+    HVAC_Dorm1,              !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+EnergyManagementSystem:Actuator,
+    Controle_VN_Dorm1,       !- Name
+    VN_Dorm1,                !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+EnergyManagementSystem:Actuator,
+    Controle_HVAC_Sala,      !- Name
+    HVAC_Sala,               !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+EnergyManagementSystem:Actuator,
+    Controle_VN_Sala,        !- Name
+    VN_Sala,                 !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+EnergyManagementSystem:Actuator,
+    Controle_HVAC_Dorm2,     !- Name
+    HVAC_Dorm2,              !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+EnergyManagementSystem:Actuator,
+    Controle_VN_Dorm2,       !- Name
+    VN_Dorm2,                !- Actuated Component Unique Name
+    Schedule:Constant,       !- Actuated Component Type
+    Schedule Value;          !- Actuated Component Control Type
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ENERGYMANAGEMENTSYSTEM:PROGRAMCALLINGMANAGER ===========
+
+EnergyManagementSystem:ProgramCallingManager,
+    Meu Controle HVAC,       !- Name
+    BeginTimestepBeforePredictor,  !- EnergyPlus Model Calling Point
+    CompDorm1Ativo,          !- Program Name 1
+    CompSalaAtivo,           !- Program Name 2
+    CompDorm2Ativo;          !- Program Name 3
+
+
+!-   ===========  ALL OBJECTS IN CLASS: ENERGYMANAGEMENTSYSTEM:PROGRAM ===========
+
+EnergyManagementSystem:Program,
+    CompDorm1Ativo,          !- Name
+    SET Temp_Conf = ((Temp_Dorm1 >= 26) || (Temp_Dorm1 <= 16)),  !- Program Line 1
+    IF (Ocup_Dorm1 > 0) && (Temp_Conf == 1),  !- Program Line 2
+    Set Controle_HVAC_Dorm1 = 1,  !- A4
+    Set Controle_VN_Dorm1 = 0,  !- A5
+    ELSEIF ((Ocup_Dorm1 > 0) && (Sensor_HVACD1 > 0)),  !- A6
+    Set Controle_HVAC_Dorm1 = 1,  !- A7
+    Set Controle_VN_Dorm1 = 0,  !- A8
+    ELSEIF ((Ocup_Sala > 0) || (Ocup_Dorm1 > 0)),  !- A9
+    Set Controle_HVAC_Dorm1 = 0,  !- A10
+    IF ((Temp_Ext<Tar_D1) && (Temp_Ext>19)),  !- A11
+    Set Controle_VN_Dorm1 = 1,  !- A12
+    ELSEIF ((Temp_Ext>Tar_D1) && (Temp_Ext>19)),  !- A13
+    Set Controle_VN_Dorm1 = 0,  !- A14
+    ELSEIF (Temp_Ext<19),    !- A15
+    Set Controle_VN_Dorm1 = 0,  !- A16
+    ENDIF,                   !- A17
+    ELSEIF (Ocup_Dorm1 == 0) && (Ocup_Sala == 0),  !- A18
+    Set Controle_HVAC_Dorm1 = 0,  !- A19
+    Set Controle_VN_Dorm1 = 0,  !- A20
+    ENDIF;                   !- A21
+
+EnergyManagementSystem:Program,
+    CompSalaAtivo,           !- Name
+    SET Temp_Conf = ((Temp_Sala >= 26) || (Temp_Sala <= 16)),  !- Program Line 1
+    IF ((Ocup_Sala > 0) && (Temp_Conf == 1)),  !- Program Line 2
+    Set Controle_HVAC_Sala = 1,  !- A4
+    Set Controle_VN_Sala = 0,!- A5
+    ELSEIF ((Ocup_Sala > 0) && (Sensor_HVACSALA > 0)),  !- A6
+    Set Controle_HVAC_Sala = 1,  !- A7
+    Set Controle_VN_Sala = 0,!- A8
+    ELSEIF (Ocup_Sala > 0),  !- A9
+    IF ((Temp_Ext<Tar_Sala) && (Temp_Ext>19)),  !- A10
+    Set Controle_HVAC_Sala = 0,  !- A11
+    Set Controle_VN_Sala = 1,!- A12
+    ELSEIF ((Temp_Ext>Tar_Sala) && (Temp_Ext>19)),  !- A13
+    Set Controle_HVAC_Sala = 0,  !- A14
+    Set Controle_VN_Sala = 0,!- A15
+    ELSEIF (Temp_Ext<19),    !- A16
+    Set Controle_HVAC_Sala = 0,  !- A17
+    Set Controle_VN_Sala = 0,!- A18
+    ENDIF,                   !- A19
+    ELSEIF (Ocup_Sala == 0), !- A20
+    Set Controle_HVAC_Sala = 0,  !- A21
+    Set Controle_VN_Sala = 0,!- A22
+    ENDIF;                   !- A23
+
+EnergyManagementSystem:Program,
+    CompDorm2Ativo,          !- Name
+    SET Temp_Conf = ((Temp_Dorm2 >= 26) || (Temp_Dorm2 <= 16)),  !- Program Line 1
+    IF (Ocup_Dorm2 > 0) && (Temp_Conf == 1),  !- Program Line 2
+    Set Controle_HVAC_Dorm2 = 1,  !- A4
+    Set Controle_VN_Dorm2 = 0,  !- A5
+    ELSEIF ((Ocup_Dorm2 > 0) && (Sensor_HVACD2 > 0)),  !- A6
+    Set Controle_HVAC_Dorm2 = 1,  !- A7
+    Set Controle_VN_Dorm2 = 0,  !- A8
+    ELSEIF ((Ocup_Sala > 0) || (Ocup_Dorm2 > 0)),  !- A9
+    Set Controle_HVAC_Dorm2 = 0,  !- A10
+    IF ((Temp_Ext<Tar_D2) && (Temp_Ext>19)),  !- A11
+    Set Controle_VN_Dorm2 = 1,  !- A12
+    ELSEIF ((Temp_Ext>Tar_D2) && (Temp_Ext>19)),  !- A13
+    Set Controle_VN_Dorm2 = 0,  !- A14
+    ELSEIF (Temp_Ext<19),    !- A15
+    Set Controle_VN_Dorm2 = 0,  !- A16
+    ENDIF,                   !- A17
+    ELSEIF (Ocup_Dorm2 == 0) && (Ocup_Sala == 0),  !- A18
+    Set Controle_HVAC_Dorm2 = 0,  !- A19
+    Set Controle_VN_Dorm2 = 0,  !- A20
+    ENDIF;                   !- A21
+

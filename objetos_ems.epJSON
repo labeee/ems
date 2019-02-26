@@ -1,0 +1,350 @@
+{
+    "EnergyManagementSystem:Sensor": {
+        "Ocup_Dorm1": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "Dormitorio1",
+            "output_variable_or_output_meter_name": "People Occupant Count"
+        },
+        "Ocup_Dorm2": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "Dormitorio2",
+            "output_variable_or_output_meter_name": "People Occupant Count"
+        },
+        "Ocup_Sala": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "Sala1",
+            "output_variable_or_output_meter_name": "People Occupant Count"
+        },
+        "Sensor_HVACD1": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "HVAC_Dorm1",
+            "output_variable_or_output_meter_name": "Schedule Value"
+        },
+        "Sensor_HVACD2": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "HVAC_Dorm2",
+            "output_variable_or_output_meter_name": "Schedule Value"
+        },
+        "Sensor_HVACSALA": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "HVAC_Sala",
+            "output_variable_or_output_meter_name": "Schedule Value"
+        },
+        "Tar_D1": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "Dorm1",
+            "output_variable_or_output_meter_name": "Zone Mean Air Temperature"
+        },
+        "Tar_D2": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "Dorm2",
+            "output_variable_or_output_meter_name": "Zone Mean Air Temperature"
+        },
+        "Tar_Sala": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "Sala",
+            "output_variable_or_output_meter_name": "Zone Mean Air Temperature"
+        },
+        "Temp_Dorm1": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "Dorm1",
+            "output_variable_or_output_meter_name": "Zone Operative Temperature"
+        },
+        "Temp_Dorm2": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "Dorm2",
+            "output_variable_or_output_meter_name": "Zone Operative Temperature"
+        },
+        "Temp_Ext": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "Environment",
+            "output_variable_or_output_meter_name": "Site Outdoor Air Drybulb Temperature"
+        },
+        "Temp_Sala": {
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 3,
+            "output_variable_or_output_meter_index_key_name": "Sala",
+            "output_variable_or_output_meter_name": "Zone Operative Temperature"
+        }
+    },
+    "EnergyManagementSystem:Actuator": {
+        "Controle_HVAC_Dorm1": {
+            "actuated_component_control_type": "Schedule Value",
+            "actuated_component_type": "Schedule:Constant",
+            "actuated_component_unique_name": "HVAC_Dorm1",
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 4
+        },
+        "Controle_HVAC_Dorm2": {
+            "actuated_component_control_type": "Schedule Value",
+            "actuated_component_type": "Schedule:Constant",
+            "actuated_component_unique_name": "HVAC_Dorm2",
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 4
+        },
+        "Controle_HVAC_Sala": {
+            "actuated_component_control_type": "Schedule Value",
+            "actuated_component_type": "Schedule:Constant",
+            "actuated_component_unique_name": "HVAC_Sala",
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 4
+        },
+        "Controle_VN_Dorm1": {
+            "actuated_component_control_type": "Schedule Value",
+            "actuated_component_type": "Schedule:Constant",
+            "actuated_component_unique_name": "VN_Dorm1",
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 4
+        },
+        "Controle_VN_Dorm2": {
+            "actuated_component_control_type": "Schedule Value",
+            "actuated_component_type": "Schedule:Constant",
+            "actuated_component_unique_name": "VN_Dorm2",
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 4
+        },
+        "Controle_VN_Sala": {
+            "actuated_component_control_type": "Schedule Value",
+            "actuated_component_type": "Schedule:Constant",
+            "actuated_component_unique_name": "VN_Sala",
+            "idf_max_extensible_fields": 0,
+            "idf_max_fields": 4
+        }
+    },
+    "EnergyManagementSystem:Program": {
+        "CompDorm1Ativo": {
+            "idf_max_extensible_fields": 20,
+            "idf_max_fields": 21,
+            "lines": [
+                {
+                    "program_line": "SET Temp_Conf = ((Temp_Dorm1 >= 26) || (Temp_Dorm1 <= 16))"
+                },
+                {
+                    "program_line": "IF (Ocup_Dorm1 > 0) && (Temp_Conf == 1)"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Dorm1 = 1"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm1 = 0"
+                },
+                {
+                    "program_line": "ELSEIF ((Ocup_Dorm1 > 0) && (Sensor_HVACD1 > 0))"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Dorm1 = 1"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm1 = 0"
+                },
+                {
+                    "program_line": "ELSEIF ((Ocup_Sala > 0) || (Ocup_Dorm1 > 0))"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Dorm1 = 0"
+                },
+                {
+                    "program_line": "IF ((Temp_Ext<Tar_D1) && (Temp_Ext>19))"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm1 = 1"
+                },
+                {
+                    "program_line": "ELSEIF ((Temp_Ext>Tar_D1) && (Temp_Ext>19))"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm1 = 0"
+                },
+                {
+                    "program_line": "ELSEIF (Temp_Ext<19)"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm1 = 0"
+                },
+                {
+                    "program_line": "ENDIF"
+                },
+                {
+                    "program_line": "ELSEIF (Ocup_Dorm1 == 0) && (Ocup_Sala == 0)"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Dorm1 = 0"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm1 = 0"
+                },
+                {
+                    "program_line": "ENDIF"
+                }
+            ]
+        },
+        "CompDorm2Ativo": {
+            "idf_max_extensible_fields": 20,
+            "idf_max_fields": 21,
+            "lines": [
+                {
+                    "program_line": "SET Temp_Conf = ((Temp_Dorm2 >= 26) || (Temp_Dorm2 <= 16))"
+                },
+                {
+                    "program_line": "IF (Ocup_Dorm2 > 0) && (Temp_Conf == 1)"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Dorm2 = 1"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm2 = 0"
+                },
+                {
+                    "program_line": "ELSEIF ((Ocup_Dorm2 > 0) && (Sensor_HVACD2 > 0))"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Dorm2 = 1"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm2 = 0"
+                },
+                {
+                    "program_line": "ELSEIF ((Ocup_Sala > 0) || (Ocup_Dorm2 > 0))"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Dorm2 = 0"
+                },
+                {
+                    "program_line": "IF ((Temp_Ext<Tar_D2) && (Temp_Ext>19))"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm2 = 1"
+                },
+                {
+                    "program_line": "ELSEIF ((Temp_Ext>Tar_D2) && (Temp_Ext>19))"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm2 = 0"
+                },
+                {
+                    "program_line": "ELSEIF (Temp_Ext<19)"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm2 = 0"
+                },
+                {
+                    "program_line": "ENDIF"
+                },
+                {
+                    "program_line": "ELSEIF (Ocup_Dorm2 == 0) && (Ocup_Sala == 0)"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Dorm2 = 0"
+                },
+                {
+                    "program_line": "Set Controle_VN_Dorm2 = 0"
+                },
+                {
+                    "program_line": "ENDIF"
+                }
+            ]
+        },
+        "CompSalaAtivo": {
+            "idf_max_extensible_fields": 22,
+            "idf_max_fields": 23,
+            "lines": [
+                {
+                    "program_line": "SET Temp_Conf = ((Temp_Sala >= 26) || (Temp_Sala <= 16))"
+                },
+                {
+                    "program_line": "IF ((Ocup_Sala > 0) && (Temp_Conf == 1))"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Sala = 1"
+                },
+                {
+                    "program_line": "Set Controle_VN_Sala = 0"
+                },
+                {
+                    "program_line": "ELSEIF ((Ocup_Sala > 0) && (Sensor_HVACSALA > 0))"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Sala = 1"
+                },
+                {
+                    "program_line": "Set Controle_VN_Sala = 0"
+                },
+                {
+                    "program_line": "ELSEIF (Ocup_Sala > 0)"
+                },
+                {
+                    "program_line": "IF ((Temp_Ext<Tar_Sala) && (Temp_Ext>19))"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Sala = 0"
+                },
+                {
+                    "program_line": "Set Controle_VN_Sala = 1"
+                },
+                {
+                    "program_line": "ELSEIF ((Temp_Ext>Tar_Sala) && (Temp_Ext>19))"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Sala = 0"
+                },
+                {
+                    "program_line": "Set Controle_VN_Sala = 0"
+                },
+                {
+                    "program_line": "ELSEIF (Temp_Ext<19)"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Sala = 0"
+                },
+                {
+                    "program_line": "Set Controle_VN_Sala = 0"
+                },
+                {
+                    "program_line": "ENDIF"
+                },
+                {
+                    "program_line": "ELSEIF (Ocup_Sala == 0)"
+                },
+                {
+                    "program_line": "Set Controle_HVAC_Sala = 0"
+                },
+                {
+                    "program_line": "Set Controle_VN_Sala = 0"
+                },
+                {
+                    "program_line": "ENDIF"
+                }
+            ]
+        }
+    },
+    "EnergyManagementSystem:ProgramCallingManager": {
+        "Meu Controle HVAC": {
+            "energyplus_model_calling_point": "BeginTimestepBeforePredictor",
+            "idf_max_extensible_fields": 3,
+            "idf_max_fields": 5,
+            "programs": [
+                {
+                    "program_name": "CompDorm1Ativo"
+                },
+                {
+                    "program_name": "CompSalaAtivo"
+                },
+                {
+                    "program_name": "CompDorm2Ativo"
+                }
+            ]
+        }
+    }
+}
